@@ -9,10 +9,19 @@
 
 		<!--Title-->
 		<div class="font-sans">
-			<span class="text-base text-orange-500 font-bold">&laquo; <a href=" {{ url_for('atividades1') }} "
-					class="text-base md:text-sm text-orange-500 font-bold no-underline hover:underline">Voltar à lista
-					de Atividades</a></span>
-
+			<div class=" flex justify-between">
+				<span class=" text-orange-500 font-bold">&laquo; <a href=" {{ url_for('atividades1') }} "
+						class="md:text-sm text-orange-500 font-bold no-underline hover:underline">Voltar à
+						lista
+						de Atividades</a></span>
+				{% if session['e_coordenador'] and versao_anterior %}
+				<span class="text-right text-orange-500 font-bold"><a
+						href=" {{ url_for('atividadesDetalhes',id_atividade=versao_anterior) }} "
+						class="text-right md:text-sm text-orange-500 font-bold no-underline hover:underline"><i
+							class="fas fa-code-branch"></i> Versão
+						anterior</a></span>
+				{% endif %}
+			</div>
 			<div class="font-sans flex pt-6 pb-2 justify-between">
 				<div class="font-bold text-xs text-gray-600">{{at[11]}}</div>
 				<div class="font-bold text-xs text-gray-600">{{at[9]}}</div>

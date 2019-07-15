@@ -189,12 +189,14 @@ def atividadesDetalhes(id_atividade):
 
 	participantes = None
 	coordenadores = None
+	versao_anterior = None
 
 	if session['e_coordenador']:
 		participantes = db.getAllParticipantes(id_atividade)
 		coordenadores = db.getCoordenadoresAnteriores(id_atividade)
+		versao_anterior = db.getVersaoAnterior(id_atividade)[0]
 	
-	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace,participantes=participantes, coordenadores=coordenadores)
+	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace,participantes=participantes, coordenadores=coordenadores,versao_anterior=versao_anterior)
 	
 # Inserida por Vitor
 @app.route('/participantes/<id_atividade>')
