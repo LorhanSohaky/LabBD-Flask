@@ -2147,14 +2147,14 @@ INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_ex
 INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (48, 19, 5, '2019-05-21', null);
 
 
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (5,  1, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (6,  4, 4, 5);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (7,  3, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (8,  2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (9,  5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (10, 2, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (5,  1, 10, 10);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (6,  4, 4, 6);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (7,  3, 100, 7);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (8,  2, 70, 5);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (9,  5, 90, 9);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (10, 2, 50, 8);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (11, 4, 2, 8);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (12, 1, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (12, 1, 100, 6);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (13, 5, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (14, 5, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (15, 3, null, null);
@@ -2168,7 +2168,7 @@ INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (23, 2, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (24, 4, 3, 9);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (25, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (26, 1, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (26, 1, 75, 7);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (27, 3, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (28, 2, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (29, 3, null, null);
@@ -2176,12 +2176,12 @@ INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (31, 3, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (32, 4, 0, 10);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (33, 4, 2, 6);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (34, 1, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (34, 1, 15, 7);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (35, 2, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (36, 4, 1, 4);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (37, 2, null, null);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (38, 5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (39, 1, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (39, 1, 100, 10);
 
 
 INSERT INTO Selecao (nro_inscritos, vagas_interno, vagas_externo) VALUES (null, 10, 2);
