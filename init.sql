@@ -2062,7 +2062,7 @@ INSERT INTO PessoaServidorTecnico (id_pessoa, id_departamento) VALUES (42, 27);
 INSERT INTO PessoaServidorTecnico (id_pessoa, id_departamento) VALUES (43, 19);
 
 INSERT INTO Extensao (nro_extensao_anterior) VALUES (null);
-INSERT INTO Extensao (nro_extensao_anterior) VALUES (null);
+INSERT INTO Extensao (nro_extensao_anterior) VALUES (1);
 INSERT INTO Extensao (nro_extensao_anterior) VALUES (null);
 INSERT INTO Extensao (nro_extensao_anterior) VALUES (null);
 INSERT INTO Extensao (nro_extensao_anterior) VALUES (null);
