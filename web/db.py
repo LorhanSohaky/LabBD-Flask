@@ -205,3 +205,9 @@ def getAllParticipantes(nro_extensao):
     
     cur.execute("SELECT pessoa.nome, pessoa.id_pessoa, frequencia, avaliacao FROM pessoa, participante, AtividadeDeExtensao WHERE AtividadeDeExtensao.nro_extensao = participante.nro_extensao AND participante.id_pessoa = pessoa.id_pessoa and AtividadeDeExtensao.nro_extensao=%s;", [nro_extensao])
     return cur.fetchall()
+
+def getCoordenadoresAnteriores(nro_extensao):
+    cur = conn.cursor()
+    
+    cur.execute("SELECT pessoa.nome, InicioCoordenacao, FimCoordenacao FROM pessoa, Coordenador cor, CoordenadorCoordenaAtividade ativ WHERE ativ.nro_extensao = %s AND ativ.id_pessoa = cor.id_pessoa AND cor.id_pessoa = pessoa.id_pessoa AND FimCoordenacao <= CURRENT_DATE;", [nro_extensao])
+    return cur.fetchall()

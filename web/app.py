@@ -187,12 +187,14 @@ def editaisDetalhes(id_edital):
 def atividadesDetalhes(id_atividade):
 	at, nome_area1, nome_area2, agencia, titulo, ac, ace = db.atividadeComDetalhes(id_atividade)
 
-	participacao=None
+	participantes = None
+	coordenadores = None
 
 	if session['e_coordenador']:
 		participantes = db.getAllParticipantes(id_atividade)
+		coordenadores = db.getCoordenadoresAnteriores(id_atividade)
 	
-	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace,participantes=participantes)
+	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace,participantes=participantes, coordenadores=coordenadores)
 	
 # Inserida por Vitor
 @app.route('/participantes/<id_atividade>')
