@@ -2131,8 +2131,8 @@ INSERT INTO AtividadeDeExtensao (nro_extensao, nro_extensao_programa, id_financi
 INSERT INTO AtividadeDeExtensao (nro_extensao, nro_extensao_programa, id_financiador, id_area_pr, id_area_se, publico_alvo, palavras_chave, resumo, data_aprovacao, inicio_previsto, fim_previsto, inicio_real, fim_real, tipo_atividade, titulo, status) VALUES (5, 5, 1, 3, 2, 'Público geral', 'Java', 'Oferecer aos interessados recursos básicos de programação e de orientação a objetos em Java.', '2017-05-21', '2018-05-21', '2019-05-21', '2019-05-21', null, 'Curso', 'Java Iniciante', 'Em andamento');
 
 
-INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (1, 19, 1, '2015-11-20','2017-11-20', 'Coordenador');
-INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (45, 19, 1, '2017-11-21', null, 'Coordenador');
+INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (1, 19, 1, '2017-11-21', null, 'Coordenador');
+INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (45, 19, 1, '2015-11-20', '2017-11-20', 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (50, 11, 3, '2019-02-21', null, 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (47, 27, 4, '2018-07-10','2019-01-20', 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (3, 27, 4, '2019-01-21', '2019-07-10', 'Coordenador');
