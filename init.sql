@@ -752,7 +752,7 @@ VIEW com Atividades (DADOS: codigo, tipo, titulo, resumo, status, nome do coorde
     Ordenada pelo número da atividade de extensão 
 */
 CREATE VIEW vAtividades AS 
-    SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status, P.nome AS coordenador, concat(PSC.cargo, ' ', PSC.tipo) AS cargoETipo
+    SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status, P.nome AS coordenador, concat(PSC.cargo, ' ', PSC.tipo) AS cargoETipo, A.inicio_real
     FROM AtividadeDeExtensao AS A LEFT JOIN CoordenadorCoordenaAtividade AS CCA ON A.nro_extensao = CCA.nro_extensao
         LEFT JOIN Pessoa AS P ON CCA.id_pessoa = P.id_pessoa
         LEFT JOIN PessoaServidorDocente PSC on P.id_pessoa = PSC.id_pessoa
@@ -2146,6 +2146,7 @@ INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extens
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (47, 27, 4, '2018-07-10','2019-01-20', 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (3, 27, 4, '2019-01-21', '2019-07-10', 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (1, 19, 5, '2019-05-21', null, 'Coordenador');
+INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (2, 28, 2, '2015-07-18', null, 'Coordenador');
 
 
 INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (45, 19, 1, '2015-11-20', '2017-11-20');
@@ -2154,6 +2155,7 @@ INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_ex
 INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (3, 27, 4, '2018-07-10','2019-01-20');
 INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (47, 27, 4, '2019-01-21', '2019-07-10');
 INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (48, 19, 5, '2019-05-21', null);
+INSERT INTO CoordenadorViceCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao) VALUES (49, 29, 2, '2015-07-18', null);
 
 
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (5,  1, 10, 10);
