@@ -9,52 +9,88 @@
 
 		<!--Title-->
 		<div class="font-sans">
-			<span class="text-base text-orange-500 font-bold">&laquo; <a href=" {{ url_for('atividades1') }} " class="text-base md:text-sm text-orange-500 font-bold no-underline hover:underline">Voltar à lista de Atividades</a></span>
+			<span class="text-base text-orange-500 font-bold">&laquo; <a href=" {{ url_for('atividades1') }} "
+					class="text-base md:text-sm text-orange-500 font-bold no-underline hover:underline">Voltar à lista
+					de Atividades</a></span>
 
 			<div class="font-sans flex pt-6 pb-2 justify-between">
-			<div class="font-bold text-xs text-gray-600">{{at[11]}}</div>
-			<div class="font-bold text-xs text-gray-600">{{at[9]}}</div>
+				<div class="font-bold text-xs text-gray-600">{{at[11]}}</div>
+				<div class="font-bold text-xs text-gray-600">{{at[9]}}</div>
 			</div>
-			<h1 class="font-sans break-normal text-gray-900 text-xl"><span class="font-bold text-gray-700">{{at[0]}}</span>	{{at[10]}}</h1>
+			<h1 class="font-sans break-normal text-gray-900 text-xl"><span
+					class="font-bold text-gray-700">{{at[0]}}</span> {{at[10]}}</h1>
 			<hr class="border-b border-gray-400">
 		</div>
 
 
-		
+
 		<div class="bg-white pt-4 mb-6 mt-6">
 			<div class="flex justify-between pt-4">
-				<p class="text-gray-600 text-xs md:text-sm text-left"><span class=" font-bold">Período real: </span>{{at[4]}} {% if at[5] %} à {{at[5]}} {% else %} - ?? (atividade em andamento) {% endif %}</p>
-				<p class="text-gray-600 text-xs md:text-sm text-left"><span class=" font-bold">Período previsto: </span>{{at[6]}} à {{at[7]}}</p>
+				<p class="text-gray-600 text-xs md:text-sm text-left"><span class=" font-bold">Período real:
+					</span>{{at[4]}} {% if at[5] %} à {{at[5]}} {% else %} - ?? (atividade em andamento) {% endif %}</p>
+				<p class="text-gray-600 text-xs md:text-sm text-left"><span class=" font-bold">Período previsto:
+					</span>{{at[6]}} à {{at[7]}}</p>
 			</div>
-			
+
 			<p><span class="font-bold"> Data de aprovação </span>{{at[8]}}<br></p>
-			
-			<p><span class="font-bold"> Área principal </span> {% for nome_area in nome_area1 %} {{nome_area[0]}}<br> {% endfor %} </p>
-			
-			<p><span class="font-bold"> Área secundária </span>{% for nome_area in nome_area2 %} {{nome_area[0]}}<br> {% endfor %} </p>
-			
+
+			<p><span class="font-bold"> Área principal </span> {% for nome_area in nome_area1 %} {{nome_area[0]}}<br>
+				{% endfor %} </p>
+
+			<p><span class="font-bold"> Área secundária </span>{% for nome_area in nome_area2 %} {{nome_area[0]}}<br>
+				{% endfor %} </p>
+
 			<p><span class="font-bold"> Palavras-chave </span>{{at[2]}}<br></p>
 
 			<p><span class="font-bold"> Resumo </span>{{at[3]}}<br></p>
 
 			{% if ac[2] %}
-				<p><span class="font-bold"> Ementa </span>{{ac[2]}}<br></p>
+			<p><span class="font-bold"> Ementa </span>{{ac[2]}}<br></p>
 
-				<p><span class="font-bold"> Horários das aulas </span>{{ac[1]}}<br></p>
-				
-				<p><span class="font-bold"> Agência do financiador </span>{% for ag in agencia%} {{ag[0]}}<br> {% endfor %}</p>
-				
-				<p><span class="font-bold"> Encontros </span>
+			<p><span class="font-bold"> Horários das aulas </span>{{ac[1]}}<br></p>
+
+			<p><span class="font-bold"> Agência do financiador </span>{% for ag in agencia%} {{ag[0]}}<br> {% endfor %}
+			</p>
+
+			<p><span class="font-bold"> Encontros </span>
 				{% for ace in aces %}
-						{{ace[0]}} | {{ace[1]}} | {{ace[2]}} | {{ace[3]}}<br></p>
-				{% endfor %}
+				{{ace[0]}} | {{ace[1]}} | {{ace[2]}} | {{ace[3]}}<br></p>
+			{% endfor %}
 			{% endif %}
-				
+
+			{% if session['e_coordenador'] %}
+			<div class="bg-white pt-4 mb-6 mt-6">
+				<h3 class="font-sans break-normal text-gray-900 text-xl"><span
+						class="font-bold text-gray-700">Participantes</span></h3>
+				<hr class="border-b border-gray-400">
+				<div class="pt-12 mb-12 mt-12">
+					<table id="tablePreview" class="table">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Frequência</th>
+								<th>Avaliacao</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for p in participantes %}
+							<tr>
+								<th scope="row">{{p[0]}}</th>
+								<td>{{p[2]}}</td>
+								<td>{{p[3]}}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			{% endif %}
+
 		</div>
-		
+
 		<!--Post Content-->
 		<!--Lead Para-->
-			
+
 	</div>
-		</div>
+</div>
 {% endblock %}

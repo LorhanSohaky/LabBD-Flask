@@ -123,7 +123,7 @@ def minhaarea():
 @app.route('/minhaarea/participantes/')
 def minhaparticipacao():
 	if not session['user']:
-		return render_template('login.html')
+		return redirect('/login')
 		
 	selecoes, participacao = db.getParticipacao(session['user'])
 	return render_template('pessoalParticipante.html', selecoes = selecoes, participacao = participacao)
@@ -131,8 +131,10 @@ def minhaparticipacao():
 @app.route('/minhaarea/coordenador/')
 def minhacoordenacao():
 	if not session['user']:
-		return render_template('login.html')
-		
+		return redirect('/login')
+	if not session['e_coordenador']:
+		return redirect('/minhaarea/')
+	
 	atividades = db.getAtividadesCoordenando(session['user'])
 	return render_template('pessoalCoordenador.html', atividades=atividades)
 
@@ -185,7 +187,12 @@ def editaisDetalhes(id_edital):
 def atividadesDetalhes(id_atividade):
 	at, nome_area1, nome_area2, agencia, titulo, ac, ace = db.atividadeComDetalhes(id_atividade)
 
-	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace)
+	participacao=None
+
+	if session['e_coordenador']:
+		participantes = db.getAllParticipantes(id_atividade)
+	
+	return render_template('atividadeExtDetalhes.html', at = at, nome_area1 = nome_area1, nome_area2 = nome_area2, agencia = agencia, programa = titulo, ac = ac, aces = ace,participantes=participantes)
 	
 # Inserida por Vitor
 @app.route('/participantes/<id_atividade>')

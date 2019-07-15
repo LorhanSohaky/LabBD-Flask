@@ -199,3 +199,9 @@ def getAtividadesCoordenando(id_pessoa):
     atividades = cur.fetchall()
 
     return atividades
+
+def getAllParticipantes(nro_extensao):
+    cur = conn.cursor()
+    
+    cur.execute("SELECT pessoa.nome, pessoa.id_pessoa, frequencia, avaliacao FROM pessoa, participante, AtividadeDeExtensao WHERE AtividadeDeExtensao.nro_extensao = participante.nro_extensao AND participante.id_pessoa = pessoa.id_pessoa and AtividadeDeExtensao.nro_extensao=%s;", [nro_extensao])
+    return cur.fetchall()
