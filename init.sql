@@ -731,6 +731,88 @@ CREATE OR REPLACE VIEW vEditais_Fechados AS
 	SELECT codigo, titulo, tipo, justificativa, data_encerramento   
 	FROM edital 
 	WHERE data_encerramento <= current_date;
+
+CREATE VIEW vCpfPassaporte AS 
+    SELECT P.id_pessoa, concat(PB.cpf, PE.passaporte) AS CpfOuPass, P.nome
+    FROM Pessoa AS P LEFT JOIN PessoaBrasileira AS PB on P.id_pessoa = PB.id_pessoa
+        LEFT JOIN PessoaEstrangeira AS PE on P.id_pessoa = PE.id_pessoa
+    ORDER BY P.id_pessoa;
+
+/*
+vAtividades
+VIEW com Atividades (DADOS: codigo, tipo, titulo, resumo, status, nome do coordenador, cargo (docente adjunto, etc))
+    O campus não foi mostrado pois por algum motivo essa informação só existe para aciepes.
+    Esta view mostra todas as atividades de extensão, sejam elas não iniciadas, em andamento ou finalizadas.
+    Para as atividades em andamento ou finalizadas que tiveram mais de um coordenador ao longo do tempo, o último é exibido.
+    Ordenada pelo número da atividade de extensão 
+*/
+CREATE VIEW vAtividades AS 
+    SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status, P.nome AS coordenador, concat(PSC.cargo, ' ', PSC.tipo) AS cargoETipo
+    FROM AtividadeDeExtensao AS A LEFT JOIN CoordenadorCoordenaAtividade AS CCA ON A.nro_extensao = CCA.nro_extensao
+        LEFT JOIN Pessoa AS P ON CCA.id_pessoa = P.id_pessoa
+        LEFT JOIN PessoaServidorDocente PSC on P.id_pessoa = PSC.id_pessoa
+    WHERE CCA.FimCoordenacao IS null OR A.fim_real = CCA.FimCoordenacao
+    ORDER BY A.nro_extensao;
+
+---------------------------------- TRIGGERS ----------------------------------
+
+
+--------------------------------- FUNCTIONS ---------------------------------
+
+/*
+VerificaCpfPass
+--- FUNCTION que verifica se o cpf ou passaporte já está cadastrado ---
+    @PassOuCpf = Passaporte ou cpf a ser consultado (VARCHAR);
+    retorno 1 = Passaporte/Cpf já cadastrado;
+    retorno 0 = Passaporte/Cpf não está cadastrado;
+*/
+CREATE FUNCTION VerificaCpfPass (PassOuCpf IN VARCHAR)
+RETURNS INTEGER AS $$
+DECLARE
+	c_busca CURSOR (PassOuCpf VARCHAR) IS SELECT CpfOuPass FROM vCpfPassaporte WHERE CpfOuPass = PassOuCpf;
+	v_busca VARCHAR;
+	ret INTEGER;
+BEGIN
+	OPEN c_busca(PassOuCpf);
+	FETCH c_busca INTO v_busca;
+	IF FOUND THEN
+		ret := 1;
+	ELSE
+		ret := 0;
+	END IF;
+	
+	CLOSE c_busca;
+	RETURN ret;
+END;
+$$ LANGUAGE plpgsql;
+
+/*
+VerificaInscricao
+--- FUNCTION que verifica se a pessoa já está inscrita na atividade especificada---
+    @pid_pessoa = id da pessoa (INTEGER);
+    @pid_atividade = número da atividade de extensao (INTEGER);
+    retorno 1 = Pessoa já inscrita na atividade;
+    retorno 0 = Pessoa não está inscrita na atividade;
+*/
+CREATE FUNCTION VerificaInscricao (pid_pessoa IN INTEGER, pid_atividade IN INTEGER)
+RETURNS INTEGER AS $$
+DECLARE
+	c_busca CURSOR (pid_pessoa INTEGER, pid_atividade INTEGER) IS SELECT id_pessoa FROM Participante WHERE id_pessoa = pid_pessoa AND nro_extensao = pid_atividade;
+	v_busca INTEGER;
+	ret INTEGER;
+BEGIN
+	OPEN c_busca(pid_pessoa, pid_atividade);
+	FETCH c_busca INTO v_busca;
+	IF FOUND THEN
+		ret := 1;
+	ELSE
+		ret := 0;
+	END IF;
+	
+	CLOSE c_busca;
+	RETURN ret;
+END;
+$$ LANGUAGE plpgsql;
 	
 
 CREATE OR REPLACE VIEW vizualizaVerbas AS
@@ -840,10 +922,6 @@ insert into pessoa(nome, senha, uf, cidade, bairro, rua, numero) values ('Luis',
 
 insert into edital (data_abertura, data_encerramento, justificativa, tipo, titulo, reoferta) 
 values ('2019-05-18', '2020-11-18', 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris.', 'Blue', 'Varanus albigularis', false);
-
-insert into bolsa(codigo_edital, bolsa) values (1, 'CNPq R$500,00');
-insert into bolsa(codigo_edital, bolsa) values (1, 'FAPESP R$700,00');
-insert into bolsa(codigo_edital, bolsa) values (1, 'CAPS R$450,00');
 
 insert into proponente(codigo_edital, proponente) values (1, 'Carlos');
 insert into proponente(codigo_edital, proponente) values (1, 'Jonathan');
