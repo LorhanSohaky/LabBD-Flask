@@ -195,7 +195,7 @@ def inscreverAtividade(id_pessoa, id_atividade):
 def getAtividadesCoordenando(id_pessoa):
     cur = conn.cursor()
     
-    cur.execute("SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status FROM AtividadeDeExtensao A, CoordenadorCoordenaAtividade coor, Coordenador cor WHERE cor.id_pessoa = %s and cor.id_pessoa = coor.id_pessoa and coor.nro_extensao = A.nro_extensao;", [id_pessoa])
+    cur.execute("SELECT * FROM getAtividadesCoordenando WHERE  coordenador= %s;", [id_pessoa])
     atividades = cur.fetchall()
 
     return atividades
@@ -203,17 +203,17 @@ def getAtividadesCoordenando(id_pessoa):
 def getAllParticipantes(nro_extensao):
     cur = conn.cursor()
     
-    cur.execute("SELECT pessoa.nome, pessoa.id_pessoa, frequencia, avaliacao FROM pessoa, participante, AtividadeDeExtensao WHERE AtividadeDeExtensao.nro_extensao = participante.nro_extensao AND participante.id_pessoa = pessoa.id_pessoa and AtividadeDeExtensao.nro_extensao=%s;", [nro_extensao])
+    cur.execute("SELECT * FROM getAllParticipantes WHERE nro_extensao=%s;", [nro_extensao])
     return cur.fetchall()
 
 def getCoordenadoresAnteriores(nro_extensao):
     cur = conn.cursor()
     
-    cur.execute("SELECT pessoa.nome, InicioCoordenacao, FimCoordenacao FROM pessoa, Coordenador cor, CoordenadorCoordenaAtividade ativ WHERE ativ.nro_extensao = %s AND ativ.id_pessoa = cor.id_pessoa AND cor.id_pessoa = pessoa.id_pessoa AND FimCoordenacao <= CURRENT_DATE;", [nro_extensao])
+    cur.execute("SELECT * FROM getCoordenadoresAnteriores WHERE nro_extensao = %s;", [nro_extensao])
     return cur.fetchall()
 
 def getVersaoAnterior(nro_extensao):
     cur = conn.cursor()
-    
-    cur.execute("SELECT nro_extensao_anterior FROM extensao WHERE nro_extensao=%s;", [nro_extensao])
+
+    cur.execute("SELECT nro_extensao_anterior FROM getVersaoAnterior WHERE nro_extensao=%s;", [nro_extensao])
     return cur.fetchone()

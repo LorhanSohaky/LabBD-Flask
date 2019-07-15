@@ -717,6 +717,11 @@ CREATE TABLE Financia
 	CONSTRAINT fk_Financiador_AtividadeDeExtensao FOREIGN KEY (nro_atividadeDeExtensao) REFERENCES AtividadeDeExtensao(nro_extensao)
 );
 
+CREATE OR REPLACE VIEW getAtividadesCoordenando AS SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status , coor.id_pessoa AS coordenador FROM AtividadeDeExtensao A, CoordenadorCoordenaAtividade coor, Coordenador cor WHERE cor.id_pessoa = coor.id_pessoa and coor.nro_extensao = A.nro_extensao;
+CREATE OR REPLACE VIEW getAllParticipantes AS SELECT pessoa.nome, pessoa.id_pessoa, frequencia, avaliacao, participante.nro_extensao FROM pessoa, participante, AtividadeDeExtensao WHERE AtividadeDeExtensao.nro_extensao = participante.nro_extensao AND participante.id_pessoa = pessoa.id_pessoa;
+CREATE OR REPLACE VIEW getCoordenadoresAnteriores AS SELECT pessoa.nome, InicioCoordenacao, FimCoordenacao, ativ.nro_extensao FROM pessoa, Coordenador cor, CoordenadorCoordenaAtividade ativ WHERE ativ.id_pessoa = cor.id_pessoa AND cor.id_pessoa = pessoa.id_pessoa AND FimCoordenacao <= CURRENT_DATE;
+CREATE OR REPLACE VIEW getVersaoAnterior AS SELECT nro_extensao_anterior, nro_extensao FROM extensao;
+
 CREATE OR REPLACE VIEW vEditais_com_detalhes AS 
     SELECT data_abertura, data_encerramento, tipo, titulo, proponente, objetivo, bolsa, atividade, data, disposicao, e.codigo as id_edital
     FROM edital e,  proponente p, objetivo o, bolsa b, cronograma c, disposicoes_gerais d
