@@ -310,8 +310,8 @@ CREATE TABLE Participante
 (
     id_pessoa INT NOT NULL,
     nro_extensao INT NOT NULL, --O que significa esse atributo? !!!!!!!!
-    frequencia INT, --frequencia como sinônimo de faltas
-    avaliacao FLOAT CHECK (avaliacao >= 0 and avaliacao <= 10),
+    frequencia INT DEFAULT 0, --frequencia como sinônimo de faltas
+    avaliacao FLOAT DEFAULT 0 CHECK (avaliacao >= 0 and avaliacao <= 10),
     
     CONSTRAINT pk_Participante PRIMARY KEY (id_pessoa, nro_extensao),
     CONSTRAINT fk_Participante_Pessoa FOREIGN KEY (id_pessoa) REFERENCES Pessoa(id_pessoa),
@@ -863,6 +863,7 @@ DECLARE
 BEGIN
 	open valores;
 	fetch valores into cnumber;
+    close valores;
 	Return cnumber;
 
 END;
@@ -2135,6 +2136,9 @@ INSERT INTO AtividadeDeExtensao (nro_extensao, nro_extensao_programa, id_financi
 INSERT INTO AtividadeDeExtensao (nro_extensao, nro_extensao_programa, id_financiador, id_area_pr, id_area_se, publico_alvo, palavras_chave, resumo, data_aprovacao, inicio_previsto, fim_previsto, inicio_real, fim_real, tipo_atividade, titulo, status) VALUES (4, 4, 2, 5, 2, 'Físicos', 'Quântica', 'Trata-se da realização de experimentos lúdicos de baixo custo com alunos do Ensino Médio (EM) a fim de transmitir, através do conhecimento científico e cotidiano adquiridos, o caráter experimental das disciplinas de ciências. Partindo deste objetivo principal, o projeto possui algumas metas, tais como abordar na prática os conceitos de física básica discutidos no EM, a conscientização sobre a importância da ciência, permitir a discussão dos resultados das experiências (visto que a maioria não tem acesso a laboratórios), etc. Ademais, pretende promover uma forte interação entre a comunidade acadêmica e a comunidade da rede pública de ensino (alunos e professores), sendo uma importante iniciativa.', '2017-01-10', '2017-07-10', '2018-07-10', '2018-07-10', '2019-07-10', 'Curso', 'Fis. Exp. Ensino Médio', 'Finalizado');
 INSERT INTO AtividadeDeExtensao (nro_extensao, nro_extensao_programa, id_financiador, id_area_pr, id_area_se, publico_alvo, palavras_chave, resumo, data_aprovacao, inicio_previsto, fim_previsto, inicio_real, fim_real, tipo_atividade, titulo, status) VALUES (5, 5, 1, 3, 2, 'Público geral', 'Java', 'Oferecer aos interessados recursos básicos de programação e de orientação a objetos em Java.', '2017-05-21', '2018-05-21', '2019-05-21', '2019-05-21', null, 'Curso', 'Java Iniciante', 'Em andamento');
 
+INSERT INTO Financia VALUES (1, 1, 10000,1);
+INSERT INTO Financia VALUES (2, 2, 5000,1);
+
 
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (1, 19, 1, '2017-11-21', null, 'Coordenador');
 INSERT INTO CoordenadorCoordenaAtividade (id_pessoa, id_departamento, nro_extensao, InicioCoordenacao, FimCoordenacao, Cargo) VALUES (45, 19, 1, '2015-11-20', '2017-11-20', 'Coordenador');
@@ -2160,32 +2164,32 @@ INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (10, 2, 50, 8);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (11, 4, 2, 8);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (12, 1, 100, 6);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (13, 5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (14, 5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (15, 3, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (16, 5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (17, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (18, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (19, 5, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (13, 5, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (14, 5, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (15, 3, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (16, 5, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (17, 2, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (18, 2, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (19, 5, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (20, 4, 2, 7);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (21, 3, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (22, 5, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (23, 2, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (21, 3, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (22, 5, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (23, 2, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (24, 4, 3, 9);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (25, 2, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (25, 2, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (26, 1, 75, 7);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (27, 3, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (28, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (29, 3, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (30, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (31, 3, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (27, 3, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (28, 2, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (29, 3, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (30, 2, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (31, 3, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (32, 4, 0, 10);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (33, 4, 2, 6);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (34, 1, 15, 7);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (35, 2, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (35, 2, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (36, 4, 1, 4);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (37, 2, null, null);
-INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (38, 5, null, null);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (37, 2, 0, 0);
+INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (38, 5, 0, 0);
 INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (39, 1, 100, 10);
 
 

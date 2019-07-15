@@ -14,12 +14,15 @@
 						class="md:text-sm text-orange-500 font-bold no-underline hover:underline">Voltar à
 						lista
 						de Atividades</a></span>
-				{% if session['e_coordenador'] and versao_anterior %}
+				{% if session['e_coordenador'] %}
+				{% if versao_anterior%}
 				<span class="text-right text-orange-500 font-bold"><a
 						href=" {{ url_for('atividadesDetalhes',id_atividade=versao_anterior) }} "
 						class="text-right md:text-sm text-orange-500 font-bold no-underline hover:underline"><i
 							class="fas fa-code-branch"></i> Versão
 						anterior</a></span>
+				{% endif%}
+				<span class="text-right text-orange-500 font-bold"><i class="fas fa-dollar-sign"></i>{{verba}}</span>
 				{% endif %}
 			</div>
 			<div class="font-sans flex pt-6 pb-2 justify-between">

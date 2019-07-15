@@ -217,3 +217,9 @@ def getVersaoAnterior(nro_extensao):
 
     cur.execute("SELECT nro_extensao_anterior FROM getVersaoAnterior WHERE nro_extensao=%s;", [nro_extensao])
     return cur.fetchone()
+
+def getVerba(nro_extensao):
+    cur = conn.cursor()
+
+    cur.callproc("sum_verba_atividade",nro_extensao)
+    return cur.fetchone()
