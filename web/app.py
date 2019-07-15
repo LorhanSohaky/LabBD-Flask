@@ -54,11 +54,6 @@ def atividades1():
 		chave = request.form['chave-atividade']
 		
 	return render_template('atividades.html')
-    
-@app.route('/teste/')
-def helloDB():
-	db.initDB()
-	return "Hello DB!"  
 	
 @app.route('/extra/')
 def extra():
@@ -146,4 +141,4 @@ def aciepesDetalhes(id_edital):
 	return render_template('aciepeDetalhes.html')
 
 if __name__ == '__main__':
-	app.run()
+	app.run(host='0.0.0.0',port=5000,debug=True)

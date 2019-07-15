@@ -2,47 +2,7 @@ import os
 import psycopg2
 from flask import current_app, g
 
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL)
-
-def initDB():
-	print("Deletando todas as tabelas...")
-	with conn.cursor() as cursor:
-		cursor.execute(open("schema_delete.sql", "r").read())
-	
-	print("Criando todas as tabelas...")
-	with conn.cursor() as cursor:
-		cursor.execute(open("schema_create.sql", "r").read())
-	conn.commit()
-	
-	#print("Inserindo editais...")
-	#with conn.cursor() as cursor:
-		#cursor.execute(open("schema_edital_insert.sql", "r").read())
-	#conn.commit()
-	
-	print("Inserindo Artefatos do G4...")
-	with conn.cursor() as cursor:
-		cursor.execute(open("artefato_g4.sql", "r").read())
-	conn.commit()
-	
-	print("Criando views de edital...")
-	
-	conn.cursor().execute("CREATE OR REPLACE VIEW vEditais_Abertos AS \
-	SELECT codigo, titulo, tipo, justificativa, (data_encerramento - data_abertura) AS tempo_restante \
-	FROM edital \
-	WHERE data_abertura <= current_date AND data_encerramento > current_date; ")
-    
-	conn.cursor().execute("CREATE OR REPLACE VIEW vEditais_Fechados AS \
-	SELECT codigo, titulo, tipo, justificativa, data_encerramento   \
-	FROM edital \
-	WHERE data_encerramento <= current_date; ")
-	
-	conn.commit()
-	
-	extra()
-	
-	
-	print("Banco de Dados pronto para o uso")
+conn = psycopg2.connect(host=os.environ['DATABASE_URL'],database='marilde', user='postgres', password=os.environ['POSTGRES_PASSWORD'])
 	
 def qtdEditais(abertos=True):
 	code = "SELECT count(*) FROM vEditais_Abertos"
