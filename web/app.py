@@ -47,8 +47,11 @@ def aciepes1():
 @app.route('/atividades/')
 def atividades1():
 	id_pessoa = 0
-	if session['user']:
-		id_pessoa = session['user']
+	try:
+		if session['user']:
+			id_pessoa = session['user']
+	except:
+		id_pessoa = 0
 	ats, res = db.ListaAtividades(id_pessoa)
 	return render_template('atividades.html', ats=ats, res = res)
 	
@@ -75,6 +78,7 @@ def extra():
 	
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+	dep = db.listaDep()
 	if request.method == 'POST':
 		cpf = request.form['Username']
 		senha = request.form['password']
@@ -97,7 +101,7 @@ def login():
 
 				return redirect('/minhaarea/')
 		
-	return render_template('login.html')
+	return render_template('login.html', departamento = dep)
 
 @app.route('/logout/')
 def logout():
@@ -151,6 +155,8 @@ def registrar():
 		rua = request.form['rua']
 		numero = request.form['numero']
 		funcao = request.form['funcao']
+		numeroUFSCar = request.form['numeroUFSCar']
+		dep = request.form['departamento']
 		
 		if not nome:
 			flash('Sem nome')
@@ -169,7 +175,7 @@ def registrar():
 		elif not funcao:
 			flash('Dados incorretos')
 		else:
-			id_pessoa = db.criaPessoa(nome, cpf, senha, estado, cidade, bairro, rua, numero, funcao)
+			id_pessoa = db.criaPessoa(nome, cpf, senha, estado, cidade, bairro, rua, numero, funcao, numeroUFSCar, dep)
 			if id_pessoa > -1:
 				g.user = id_pessoa
 				g.nome = nome
