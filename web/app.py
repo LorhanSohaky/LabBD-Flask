@@ -94,6 +94,8 @@ def login():
 				session['cpf_pass'] = cpf
 				g.user = session['user']
 				g.nome = session['nome']
+
+				return redirect('/minhaarea/')
 		
 	return render_template('login.html')
 
@@ -125,6 +127,14 @@ def minhaparticipacao():
 		
 	selecoes, participacao = db.getParticipacao(session['user'])
 	return render_template('pessoalParticipante.html', selecoes = selecoes, participacao = participacao)
+
+@app.route('/minhaarea/coordenador/')
+def minhacoordenacao():
+	if not session['user']:
+		return render_template('login.html')
+		
+	atividades = db.getAtividadesCoordenando(session['user'])
+	return render_template('pessoalCoordenador.html', atividades=atividades)
 
 	
 @app.route('/registrar/', methods=['GET', 'POST'])

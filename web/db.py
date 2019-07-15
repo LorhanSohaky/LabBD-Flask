@@ -191,3 +191,11 @@ def inscreverAtividade(id_pessoa, id_atividade):
     cur = conn.cursor()
     cur.execute("INSERT INTO Participante (id_pessoa, nro_extensao, frequencia, avaliacao) VALUES (%s,  %s, null, null);", [id_pessoa, id_atividade])
     conn.commit()
+
+def getAtividadesCoordenando(id_pessoa):
+    cur = conn.cursor()
+    
+    cur.execute("SELECT A.nro_extensao, A.tipo_atividade, A.titulo, A.resumo, A.status FROM AtividadeDeExtensao A, CoordenadorCoordenaAtividade coor, Coordenador cor WHERE cor.id_pessoa = %s and cor.id_pessoa = coor.id_pessoa and coor.nro_extensao = A.nro_extensao;", [id_pessoa])
+    atividades = cur.fetchall()
+
+    return atividades
