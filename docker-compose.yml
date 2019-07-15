@@ -11,11 +11,12 @@ services:
     environment:
       DATABASE_URL: banco
       POSTGRES_PASSWORD: "admin"
+      POSTGRES_PORT: "5432"
     volumes:
       - web-data:/usr/src/app/static
     command: python app.py
     ports:
-      - "5000:5000"
+      - "8000:5000"
     networks:
       - postgres-compose-network
 

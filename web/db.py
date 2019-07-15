@@ -2,7 +2,7 @@ import os
 import psycopg2
 from flask import current_app, g
 
-conn = psycopg2.connect(host=os.environ['DATABASE_URL'], database='marilde',user='postgres', password=os.environ['POSTGRES_PASSWORD'])
+conn = psycopg2.connect(host=os.environ['DATABASE_URL'], database='marilde',user='postgres', password=os.environ['POSTGRES_PASSWORD'],port=os.environ['POSTGRES_PORT'])
 
 
 def initDB():
