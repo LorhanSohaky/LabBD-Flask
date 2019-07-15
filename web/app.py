@@ -105,13 +105,13 @@ def login():
 
 @app.route('/logout/')
 def logout():
-	session['user'] = None
-	return render_template('index.html')
+	session.clear()
+	return redirect('/')
 
 @app.route('/minhaarea/')
 def minhaarea():
-	if not session['user']:
-		return render_template('login.html')
+	if not session.get('user'):
+		return redirect('/login')
 		
 	g.user = session['user']
 	g.nome = session['nome']
@@ -134,9 +134,9 @@ def minhaparticipacao():
 
 @app.route('/minhaarea/coordenador/')
 def minhacoordenacao():
-	if not session['user']:
+	if not session.get('user'):
 		return redirect('/login')
-	if not session['e_coordenador']:
+	if not session.get('e_coordenador'):
 		return redirect('/minhaarea/')
 	
 	atividades = db.getAtividadesCoordenando(session['user'])
@@ -198,7 +198,7 @@ def atividadesDetalhes(id_atividade):
 	versao_anterior = None
 	verba = 0
 
-	if session['e_coordenador']:
+	if session.get('e_coordenador'):
 		verba = db.getVerba(id_atividade)[0] or 0.00
 		print(verba)
 		participantes = db.getAllParticipantes(id_atividade)
@@ -210,7 +210,7 @@ def atividadesDetalhes(id_atividade):
 # Inserida por Vitor
 @app.route('/participantes/<id_atividade>')
 def participanteInfos(id_atividade):
-	if not session['user']:
+	if not session.get('user'):
 		return render_template('login.html')
 	id_participante = session['user']
 	part, titulo, nome, coordena = db.participantesInfos(id_atividade, id_participante)
